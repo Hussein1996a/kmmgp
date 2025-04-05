@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K&M MGP - المتجر الرسمي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         /* الأساسيات */
         :root {
             --primary-color: #C1272D;
+            --primary-dark: #9a1f24;
             --secondary-color: #E6E6E6;
             --dark-color: #1A1A1A;
             --light-color: #FFFFFF;
@@ -17,6 +18,8 @@
             --text-color: #333333;
             --text-light: #666666;
             --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         * {
@@ -53,7 +56,7 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--box-shadow);
             border: none;
             outline: none;
             transition: var(--transition);
@@ -61,6 +64,7 @@
 
         .menu-toggle:hover {
             transform: scale(1.1);
+            background-color: var(--primary-dark);
         }
 
         /* طبقة التعتيم عند فتح القائمة */
@@ -70,7 +74,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
@@ -95,7 +99,7 @@
             transform: translateX(0);
             transition: var(--transition);
             z-index: 1000;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--box-shadow-hover);
             overflow-y: auto;
         }
 
@@ -106,14 +110,10 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .logo h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .logo span {
-            color: var(--primary-color);
+        .logo img {
+            max-width: 180px;
+            height: auto;
+            filter: brightness(0) invert(1);
         }
 
         .sidebar nav ul {
@@ -186,9 +186,10 @@
         .hero-section {
             height: 80vh;
             min-height: 500px;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080/1A1A1A/C1272D?text=K&M+MGP');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('sss.png');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             border-radius: 15px;
             position: relative;
             overflow: hidden;
@@ -205,12 +206,18 @@
             z-index: 2;
             padding: 20px;
             max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .hero-content h2 {
             font-size: 48px;
             margin-bottom: 20px;
             animation: fadeInDown 1s ease;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .hero-content h2 span {
@@ -221,6 +228,7 @@
             font-size: 20px;
             margin-bottom: 30px;
             animation: fadeInUp 1s ease;
+            line-height: 1.6;
         }
 
         .cta-btn {
@@ -234,6 +242,8 @@
             transition: var(--transition);
             animation: fadeIn 1.5s ease;
             border: 2px solid var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .cta-btn:hover {
@@ -252,6 +262,8 @@
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
+            font-weight: 700;
+            color: var(--dark-color);
         }
 
         .section-title span {
@@ -280,7 +292,7 @@
             background-color: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             transition: var(--transition);
             position: relative;
             border: 1px solid var(--secondary-color);
@@ -288,14 +300,39 @@
 
         .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
         }
 
         .product-image {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: cover;
             background-color: var(--secondary-color);
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
         }
 
         .product-info {
@@ -306,6 +343,14 @@
             font-size: 20px;
             margin-bottom: 10px;
             color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        .product-description {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
         }
 
         .product-price {
@@ -353,7 +398,7 @@
             padding: 60px 20px;
             border-radius: 15px;
             margin-bottom: 40px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             border: 1px solid var(--secondary-color);
         }
 
@@ -369,6 +414,17 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark-color);
         }
 
         .contact-form input,
@@ -397,6 +453,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            margin-top: 10px;
         }
 
         .contact-form button:hover {
@@ -440,7 +497,7 @@
             height: 500px;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             border: 1px solid var(--secondary-color);
         }
 
@@ -457,7 +514,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
@@ -481,7 +538,7 @@
             transition: var(--transition);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
             border-right: 1px solid var(--secondary-color);
         }
 
@@ -526,6 +583,18 @@
             padding: 20px;
         }
 
+        .cart-empty {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-light);
+        }
+
+        .cart-empty i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
         .cart-item {
             display: flex;
             gap: 15px;
@@ -550,6 +619,7 @@
             font-size: 16px;
             margin-bottom: 5px;
             color: var(--dark-color);
+            font-weight: 600;
         }
 
         .cart-item-price {
@@ -566,6 +636,9 @@
             cursor: pointer;
             font-size: 14px;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .cart-item-remove:hover {
@@ -613,6 +686,7 @@
             justify-content: space-between;
             margin-bottom: 20px;
             font-size: 18px;
+            font-weight: 700;
         }
 
         .payment-methods {
@@ -627,11 +701,13 @@
         .methods {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .methods img {
             height: 30px;
             border-radius: 4px;
+            border: 1px solid var(--secondary-color);
         }
 
         .checkout-btn {
@@ -645,6 +721,10 @@
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .checkout-btn:hover {
@@ -768,6 +848,11 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
+            .hero-section {
+                height: 70vh;
+                min-height: 400px;
+            }
+            
             .hero-content h2 {
                 font-size: 36px;
             }
@@ -802,8 +887,8 @@
 
         @media (max-width: 576px) {
             .hero-section {
-                height: 70vh;
-                min-height: 400px;
+                height: 60vh;
+                min-height: 350px;
             }
             
             .hero-content h2 {
@@ -907,7 +992,7 @@
     <!-- الشريط الجانبي -->
     <aside class="sidebar" id="sidebar">
         <div class="logo">
-            <h1>K&M <span>MGP</span></h1>
+            <img src="logo.png" alt="K&M MGP Logo">
         </div>
         <nav>
             <ul>
@@ -928,7 +1013,6 @@
     <main class="main-content">
         <!-- القسم الرئيسي -->
         <section id="home" class="hero-section">
-            <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h2>مرحبًا بكم في <span>K&M MGP</span></h2>
                 <p>اكتشف منتجاتنا المميزة بجودة فائقة وأسعار تنافسية</p>
@@ -938,6 +1022,7 @@
 
         <!-- قسم العروض -->
         <section id="products" class="products-section">
+            <h2 class="section-title">منتجات <span>متجرنا</span></h2>
             <div class="products-grid" id="products-grid">
                 <!-- سيتم إضافة المنتجات عبر JavaScript -->
             </div>
@@ -945,18 +1030,31 @@
 
         <!-- قسم اتصل بنا -->
         <section id="contact" class="contact-section">
+            <h2 class="section-title">تواصل <span>معنا</span></h2>
             <div class="contact-container">
                 <form class="contact-form">
-                    <input type="text" placeholder="اسمك الكريم" required>
-                    <input type="email" placeholder="بريدك الإلكتروني" required>
-                    <input type="tel" placeholder="رقم هاتفك">
-                    <textarea placeholder="رسالتك" required></textarea>
-                    <button type="submit">إرسال الرسالة</button>
+                    <div class="form-group">
+                        <label for="name">اسمك الكريم</label>
+                        <input type="text" id="name" placeholder="أدخل اسمك" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">بريدك الإلكتروني</label>
+                        <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم هاتفك</label>
+                        <input type="tel" id="phone" placeholder="أدخل رقم هاتفك">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">رسالتك</label>
+                        <textarea id="message" placeholder="أدخل رسالتك" required></textarea>
+                    </div>
+                    <button type="submit"><i class="fas fa-paper-plane"></i> إرسال الرسالة</button>
                 </form>
                 <div class="contact-info">
                     <div class="info-item">
                         <i class="fas fa-phone"></i>
-                        <p>009664510216</p>
+                        <p>00966508009001</p>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-envelope"></i>
@@ -966,6 +1064,10 @@
                         <i class="fas fa-clock"></i>
                         <p>الأحد - الخميس: 9 ص - 5 م</p>
                     </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>المملكة العربية السعودية، جدة</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -974,7 +1076,7 @@
         <section id="location" class="location-section">
             <h2 class="section-title">مقر <span>الشركة</span></h2>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1ddummy!2dDummy!3dDummy!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zDummy!5e0!3m2!1sen!2ssa!4vDummy" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3626.23456789!2d46.67598765!3d24.71345678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQyJzQ4LjQiTiA0NsKwNDAnMzMuNiJF!5e0!3m2!1sen!2ssa!4v1623456789012" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </section>
     </main>
@@ -988,6 +1090,10 @@
         </div>
         <div class="cart-content" id="cart-content">
             <!-- سيتم إضافة عناصر السلة هنا -->
+            <div class="cart-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <p>سلة التسوق فارغة</p>
+            </div>
         </div>
         <div class="cart-footer">
             <div class="cart-total">
@@ -997,12 +1103,13 @@
             <div class="payment-methods">
                 <h4>طرق الدفع:</h4>
                 <div class="methods">
-                    <img src="visa.png"فيزا">
-                    <img src="unnamed.png" alt="مدى">
-                    <img src="apple.png" alt="آبل باي">
+                    <img src="visa.png" alt="فيزا">
+                    <img src="mastercard.png" alt="ماستركارد">
+                    <img src="mada.png" alt="مدى">
+                    <img src="apple-pay.png" alt="آبل باي">
                 </div>
             </div>
-            <button class="checkout-btn" id="checkout-btn">إتمام الشراء</button>
+            <button class="checkout-btn" id="checkout-btn"><i class="fas fa-credit-card"></i> إتمام الشراء</button>
         </div>
     </div>
 
@@ -1020,42 +1127,51 @@
                 title: "شيلد حماية 1",
                 price: 199.99,
                 oldPrice: 249.99,
-                image: "222.jpg"
+                image: "222.jpg",
+                description: "شيلد حماية عالي الجودة لزجاج السيارة الأمامي والخلفي",
+                badge: "الأكثر مبيعاً"
             },
             {
                 id: 2,
                 title: "حامي الزجاج الأمامي",
                 price: 149.99,
                 oldPrice: 199.99,
-                image: "333.jpg"
+                image: "333.jpg",
+                description: "حامي زجاج أمامي مقاوم للخدوش والكسر",
+                badge: "عرض خاص"
             },
             {
                 id: 3,
                 title: "فيميه أمامي",
                 price: 99.99,
                 oldPrice: 129.99,
-                image: "444.png"
+                image: "444.png",
+                description: "فيميه أمامي عالي الجودة مع طبقة حماية من الأشعة فوق البنفسجية"
             },
             {
                 id: 4,
                 title: "سائل تنظيف الزجاج",
                 price: 79.99,
                 oldPrice: 99.99,
-                image: "555.jpg"
+                image: "555.jpg",
+                description: "سائل تنظيف زجاج السيارة بتركيبة خاصة تمنع التصاق الأتربة"
             },
             {
                 id: 5,
                 title: "شمسية زجاج نافذة",
                 price: 299.99,
                 oldPrice: 399.99,
-                image: "666.jpg"
+                image: "666.jpg",
+                description: "شمسية زجاج نافذة قابلة للطي مع حماية من الأشعة فوق البنفسجية",
+                badge: "جديد"
             },
             {
                 id: 6,
-                title: "برو شيلد ",
+                title: "برو شيلد",
                 price: 129.99,
                 oldPrice: 159.99,
-                image: "777.jpg"
+                image: "777.jpg",
+                description: "برو شيلد طبقة حماية متقدمة للزجاج الأمامي"
             }
         ];
 
@@ -1084,18 +1200,24 @@
                 const productElement = document.createElement('div');
                 productElement.classList.add('product-card');
                 productElement.innerHTML = `
-                    <img src="${product.image}" alt="${product.title}" class="product-image">
+                    <div class="product-image-container">
+                        <img src="${product.image}" alt="${product.title}" class="product-image">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    </div>
                     <div class="product-info">
                         <h3 class="product-title">${product.title}</h3>
+                        <p class="product-description">${product.description}</p>
                         <div class="product-price">
                             <span class="price">${product.price.toFixed(2)} ر.س</span>
-                            <span class="old-price">${product.oldPrice.toFixed(2)} ر.س</span>
+                            ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toFixed(2)} ر.س</span>` : ''}
                         </div>
                         <button class="add-to-cart" data-id="${product.id}">
                             <i class="fas fa-cart-plus"></i> أضف إلى السلة
                         </button>
                     </div>
                 `;
+                
+
                 
                 productsGrid.appendChild(productElement);
             });
